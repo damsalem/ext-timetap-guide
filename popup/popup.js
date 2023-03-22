@@ -39,5 +39,5 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     // Handles pages that aren't listed above
     var redirectH2 = createRedirectH2Link();
     howToLink.innerText = "Hmm... No relevant articles found.";
-    howToLink.parentNode.insertBefore(redirectH2, howToLink.nextSibling);
+    howToLink.insertAdjacentElement("afterend", redirectH2);
 });
