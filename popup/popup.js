@@ -1,63 +1,64 @@
+function createLink(customLink, customText) {
+    var anchorTag = document.createElement("a");
+    anchorTag.innerText = customText;
+    anchorTag.setAttribute("href", customLink);
+    anchorTag.setAttribute("target", "_blank");
+    return anchorTag;
+}
+
+function createRedirectH2Link() {
+    var h2 = document.createElement("h2");
+    var anchorTag = document.createElement("a");
+    anchorTag.innerText = "Visit TimeTap";
+    anchorTag.setAttribute(
+        "href",
+        "https://backoffice.timetap.com/backoffice/app/home"
+    );
+    anchorTag.setAttribute("target", "_blank");
+    h2.appendChild(anchorTag);
+    return h2;
+}
+
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     var currentTab = tabs[0];
     var currentUrl = currentTab.url;
 
-    var anchorTag = null;
+    var pageLinks = {
+        "https://backoffice.timetap.com/backoffice/app/home#/dashboard-setup-guide":
+            {
+                customLink:
+                    "https://timetap.atlassian.net/wiki/spaces/TmTapBO/pages/31162397/Dashboard",
+                customText: "Dashboard",
+            },
+        "https://backoffice.timetap.com/backoffice/app/home#/dashboard-gadgets":
+            {
+                customLink:
+                    "https://timetap.atlassian.net/wiki/spaces/TmTapBO/pages/70516798/Gadgets",
+                customText: "Gadgets",
+            },
+        "https://backoffice.timetap.com/backoffice/app/home#/dashboard-reports/reports-runner":
+            {
+                customLink:
+                    "https://timetap.atlassian.net/wiki/spaces/TmTapBO/pages/45350930/Reports",
+                customText: "Reports",
+            },
+        // Add more objects as needed for other pages
+    };
+
+    var howToLink = document.querySelector("#howToLink");
     var customLink = null;
     var customText = null;
 
-    switch (true) {
-        case currentUrl.includes(
-            "https://backoffice.timetap.com/backoffice/app/home#/dashboard-setup-guide"
-        ):
-            customLink =
-                "https://timetap.atlassian.net/wiki/spaces/TmTapBO/pages/31162397/Dashboard";
-            customText = "Dashboard";
-            break;
-        case currentUrl.includes(
-            "https://backoffice.timetap.com/backoffice/app/home#/dashboard-gadgets"
-        ):
-            customLink =
-                "https://timetap.atlassian.net/wiki/spaces/TmTapBO/pages/70516798/Gadgets";
-            customText = "Gadgets";
-            break;
-        case currentUrl.includes(
-            "https://backoffice.timetap.com/backoffice/app/home#/dashboard-reports/reports-runner"
-        ):
-            customLink =
-                "https://timetap.atlassian.net/wiki/spaces/TmTapBO/pages/45350930/Reports";
-            customText = "Reports";
-            break;
-        // Add more cases as needed for other pages
-        default:
-            customText = "Hmm... No relevant articles found.";
-            break;
-    }
-
-    console.log(document.querySelector("#customLink"));
-
-    if (customLink) {
-        anchorTag = document.createElement("a");
-        anchorTag.innerText = customText;
-        anchorTag.setAttribute("href", customLink);
-        anchorTag.setAttribute("target", "_blank");
-        var customLink = document.querySelector("#customLink");
-        customLink.appendChild(anchorTag);
-        console.log(anchorTag);
+    if (pageLinks[currentUrl]) {
+        customLink = pageLinks[currentUrl].customLink;
+        customText = pageLinks[currentUrl].customText;
+        var linkEl = createLink(customLink, customText);
+        howToLink.appendChild(linkEl);
         return;
     }
 
     // Handles pages that aren't listed above
-    var customLink = document.querySelector("#customLink");
-    customLink.innerText = customText;
-    var redirectH2 = document.createElement("h2");
-    var redirectAnchor = document.createElement("a");
-    redirectAnchor.innerText = "Visit TimeTap";
-    redirectAnchor.setAttribute(
-        "href",
-        "https://backoffice.timetap.com/backoffice/app/home"
-    );
-    redirectAnchor.setAttribute("target", "_blank");
-    redirectH2.appendChild(redirectAnchor);
-    customLink.insertAdjacentElement("afterend", redirectH2);
+    var redirectH2 = createRedirectH2Link();
+    howToLink.innerText = "Hmm... No relevant articles found.";
+    howToLink.parentNode.insertBefore(redirectH2, howToLink.nextSibling);
 });
