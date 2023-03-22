@@ -15,6 +15,8 @@ Try out the latest, unpublished version here.
 
 The implementation should be fairly simple, provide links to different FAQs based on the URL the visitor is on. Likely, I'll use a switch statement because we'll be handling about a dozen different pages initially and if it is approved, it will scale up to the entire backend.
 
+I asked ChatGPT to refactor my code after using quite a few different switch/case statements and it suggested I use an object and a bracket notation to iterate through and find the relevant URLs.
+
 ## ES6 Syntax and Chrome
 
 ChatGPT has just told me that according to Statcounter, only 60% of Chrome users are using the latest version. I visited Statcounter and found that typically less than 50% of users are on the latest version of Chrome.
