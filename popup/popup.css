@@ -2,9 +2,38 @@
 .bold {
     font-weight: bold;
 }
+.button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #5fbd74;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 5px 0;
+    padding: 15px 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: filter 300ms ease-in-out;
+}
+.button:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+}
+.button.gray {
+    background-color: #848484;
+}
+.mt-20 {
+    margin-top: 20px;
+}
 
 /* Typical Styles */
 .container {
     min-width: 400px;
     text-align: center;
+}
+
+.button-flex {
+    display: flex;
+    gap: 5px;
 }

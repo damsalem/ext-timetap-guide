@@ -6,8 +6,8 @@ function createLink(customLink, customText) {
     return anchorTag;
 }
 
-function createRedirectH2Link() {
-    var h2 = document.createElement("h2");
+function createRedirectH3Link() {
+    var h3 = document.createElement("h3");
     var anchorTag = document.createElement("a");
     anchorTag.innerText = "Visit TimeTap";
     anchorTag.setAttribute(
@@ -15,8 +15,8 @@ function createRedirectH2Link() {
         "https://backoffice.timetap.com/backoffice/app/home"
     );
     anchorTag.setAttribute("target", "_blank");
-    h2.appendChild(anchorTag);
-    return h2;
+    h3.appendChild(anchorTag);
+    return h3;
 }
 
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -37,7 +37,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     }
 
     // Handles pages that aren't listed above
-    var redirectH2 = createRedirectH2Link();
+    var redirectH3 = createRedirectH3Link();
     howToLink.innerText = "Hmm... No relevant articles found.";
-    howToLink.insertAdjacentElement("afterend", redirectH2);
+    howToLink.insertAdjacentElement("afterend", redirectH3);
 });
