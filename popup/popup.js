@@ -27,7 +27,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     var helpLink = null;
     var helpText = null;
 
-    // pageLinks is defined in pageLinks.js which is imported into popup.html
+    // pageLinks is defined in pageLinks.js which is also imported into popup.html
     if (pageLinks[currentUrl]) {
         helpLink = pageLinks[currentUrl].helpLink;
         helpText = pageLinks[currentUrl].helpText;
