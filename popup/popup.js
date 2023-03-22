@@ -23,32 +23,11 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     var currentTab = tabs[0];
     var currentUrl = currentTab.url;
 
-    var pageLinks = {
-        "https://backoffice.timetap.com/backoffice/app/home#/dashboard-setup-guide":
-            {
-                helpLink:
-                    "https://timetap.atlassian.net/wiki/spaces/TmTapBO/pages/31162397/Dashboard",
-                helpText: "Dashboard",
-            },
-        "https://backoffice.timetap.com/backoffice/app/home#/dashboard-gadgets":
-            {
-                helpLink:
-                    "https://timetap.atlassian.net/wiki/spaces/TmTapBO/pages/70516798/Gadgets",
-                helpText: "Gadgets",
-            },
-        "https://backoffice.timetap.com/backoffice/app/home#/dashboard-reports/reports-runner":
-            {
-                helpLink:
-                    "https://timetap.atlassian.net/wiki/spaces/TmTapBO/pages/45350930/Reports",
-                helpText: "Reports",
-            },
-        // Add more objects as needed for other pages
-    };
-
     var howToLink = document.querySelector("#howToLink");
     var helpLink = null;
     var helpText = null;
 
+    // pageLinks is defined in pageLinks.js which is imported into popup.html
     if (pageLinks[currentUrl]) {
         helpLink = pageLinks[currentUrl].helpLink;
         helpText = pageLinks[currentUrl].helpText;
