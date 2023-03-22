@@ -47,5 +47,17 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         return;
     }
 
-    document.querySelector("#customLink").innerText = customText;
+    // Handles pages that aren't listed above
+    var customLink = document.querySelector("#customLink");
+    customLink.innerText = customText;
+    var redirectH2 = document.createElement("h2");
+    var redirectAnchor = document.createElement("a");
+    redirectAnchor.innerText = "Visit TimeTap";
+    redirectAnchor.setAttribute(
+        "href",
+        "https://backoffice.timetap.com/backoffice/app/home"
+    );
+    redirectAnchor.setAttribute("target", "_blank");
+    redirectH2.appendChild(redirectAnchor);
+    customLink.insertAdjacentElement("afterend", redirectH2);
 });
